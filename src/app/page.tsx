@@ -40,7 +40,7 @@ export default async function Home() {
         <div key={el.id}>
           <Link href={`/people/`+ el.id}>{el.name}</Link>
           <h2>films {el.films}
-            <Link href={`/films/`+ el.id } > {el.films}</Link>
+            <Link href={`/films/`+ el.id } >films</Link>
           </h2>
           <h3>{el.starships}</h3>
           <h4>{el.hair_color}</h4>

@@ -16,7 +16,7 @@ type FilmsProps = {
 };
 
 async function fetchFilmData(id: string): Promise<Film> {
-  const res = await fetch(`https://sw-api.starnavi.io/films/${id}`);
+  const res = await fetch(`https://sw-api.starnavi.io/films/`+id);
     const result = await res.json();
     console.log(result);
     return {
