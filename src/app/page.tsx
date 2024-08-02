@@ -31,39 +31,43 @@ export default async function Home() {
       </main>
     );
   }
-
-  return (
-  <>
-    <main>
-      <div className={styles.container}>
-          <ul>{person.map((el) => (
-            <li className={styles.containerManePage} key={el.id}>
-              <Link className={styles.linkStyle} href={`/people/` + el.id}>{el.name}</Link>
-              <h2 className={styles.nameOfTitle}>Films:</h2>
-              <ul>
-                {el.films.map((filmId: any) => (
-                  <li className={styles.item} key={filmId}>
-                    <Link className={styles.linkStyle} href={`/films/${filmId}`}>
-                      Film {filmId}
-                    </Link>
-                  </li>))}
-              </ul>
-              <h2 className={styles.nameOfTitle}> Starships: </h2>
-              <ul>
-            {el.starships.map((starshipsId:any) => (
-              <li className={styles.item} key={starshipsId}>
-                <Link className={styles.linkStyle} href={`/starships/${starshipsId}`}>
-                  Starship {starshipsId}
-                </Link>
+ return (
+    <>
+      <main>
+        <div className={styles.container}>
+          <ul>
+            {person.map((el) => (
+              <li className={styles.containerManePage} key={el.id}>
+                <Link className={styles.linkStyle} href={`/people/${el.id}`}>{el.name}</Link>
+                <h2 className={styles.nameOfTitle}>Films:</h2>
+                <ul>
+                  {el.films.map((filmId: any) => (
+                    <li className={styles.item} key={filmId}>
+                      <Link className={styles.linkStyle} href={`/films/${filmId}`}>
+                        Film {filmId}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <h2 className={styles.nameOfTitle}>Starships:</h2>
+                {el.starships.length > 0 ? (
+                  <ul>
+                    {el.starships.map((starshipId: any) => (
+                      <li className={styles.item} key={starshipId}>
+                        <Link className={styles.linkStyle} href={`/starships/${starshipId}`}>
+                          Starship {starshipId}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <h3 className={styles.opps}>no starship </h3>
+                )}
               </li>
             ))}
           </ul>
-            </li>
-      ))}
-          </ul>
-      </div>     
-    </main></>
-
+        </div>
+      </main>
+    </>
   );
 }
-

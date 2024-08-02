@@ -1,3 +1,5 @@
+
+
 .contLayout{
     display: flex;
     justify-content: center;
@@ -27,6 +29,13 @@
     border:1px black solid;
     padding: 12px;
     margin: 8px 0;
+}
+.opps{
+    color:black;
+}
+
+.item:hover{
+    background-color: #f9f2f4;
 }
 
 .nameOfTitle {
