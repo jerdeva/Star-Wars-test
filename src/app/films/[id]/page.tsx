@@ -65,7 +65,6 @@
 
 
 
-
 import React from 'react';
 import Link from 'next/link';
 import styles from './styles.module.css';
@@ -77,10 +76,6 @@ type Film = {
   opening_crawl: string;
   characters: number[];
   starships: number[];
-};
-
-type FilmsProps = {
-  film: Film;
 };
 
 async function fetchFilmData(id: string): Promise<Film> {
@@ -97,7 +92,15 @@ async function fetchFilmData(id: string): Promise<Film> {
   };
 }
 
-const Films: React.FC<FilmsProps> = ({ film }) => {
+interface FilmsProps {
+  params: {
+    id: string;
+  };
+}
+
+const Films: React.FC<FilmsProps> = async ({ params: { id } }) => {
+  const film = await fetchFilmData(id);
+
   return (
     <>
       <h3>Title: {film.title}</h3>
@@ -121,17 +124,6 @@ const Films: React.FC<FilmsProps> = ({ film }) => {
       </Link>
     </>
   );
-};
-
-export const getServerSideProps = async (context: any) => {
-  const { id } = context.params;
-  const film = await fetchFilmData(id);
-
-  return {
-    props: {
-      film,
-    },
-  };
 };
 
 export default Films;
