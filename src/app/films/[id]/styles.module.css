@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+}
+
+.containerChild {
+    margin-left: 12px;
+    background-color: transparent;
+}
+
+.linkStyle {
+    text-decoration: none;
+    color: brown;
+    font-size: 20px;
+}
+
+.spanWrap{
+    font-weight: 700;
+    font-size: 16px;
+}

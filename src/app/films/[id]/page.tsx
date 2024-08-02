@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import styles from './styles.module.css'
 
 type Film = {
   title: string;
@@ -17,8 +19,6 @@ type FilmsProps = {
 async function fetchFilmData(id: number): Promise<Film> {
     const res = await fetch(`https://sw-api.starnavi.io/films/`+id);
     const result = await res.json();
-  // console.log(result);
-  // console.log(id);
     
     return{
           title: result.title || '',
@@ -37,23 +37,25 @@ const Films: React.FC<FilmsProps> = async ({ params: { id } }) => {
 
     return (
       <>
-        <h1>{film.title}</h1>
-         <p>ID: {id}</p>
-        <p>Director: {film.director}</p>
-        <p>Release Date: {film.release_date}</p>
+        <h3>Title: {film.title}</h3>
+        <p><span className={styles.spanWrap}>Director:</span> {film.director}</p>
+        <p><span className={styles.spanWrap}>Release Date:</span> {film.release_date}</p>
         <p>{film.opening_crawl}</p>
-        <h2>Starships</h2>
-        <ul>
+        <h3>Starships</h3>
+        <ul className={styles.container}>
           {film.starships.map((starship, index) => (
-            <li key={index}>{starship}</li>
+            <li className={styles.containerChild} key={index}>{starship}</li>
           ))}
         </ul>
-        <h2>Characters</h2>
-        <ul>
+        <h3>Characters</h3>
+        <ul className={styles.container}>
           {film.characters.map((character, index) => (
-            <li key={index}>{character}</li>
+            <li className={styles.containerChild} key={index}>{character}</li>
           ))}
         </ul>
+              <Link className={styles.linkStyle} href="/">
+        Назад на главную страницу
+      </Link>
       </>
     );
 };

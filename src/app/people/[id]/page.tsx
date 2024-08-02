@@ -1,3 +1,7 @@
+import Link from 'next/link';
+import styles from './styles.module.css'
+
+
 type Person = {
   id: number,
   name: string,
@@ -15,7 +19,6 @@ type HeroProps = {
 async function fetchData(id: string): Promise<Person> {
   const res = await fetch(`https://sw-api.starnavi.io/people/` + id);
   const result = await res.json();
-  // console.log(result);
   return {
     id: result.id,
     name: result.name,
@@ -31,21 +34,23 @@ const Hero: React.FC<HeroProps> = async ({ params: {id} }) => {
   return (
     <>
       <h1>{person.name}</h1>
-      <p>ID: {id}</p>
-      <p>Hair Color: {person.hair_color}</p>
-      <h2>Starships</h2>
-      <ul>
+      <div >
+        <h2>Starships</h2>
+      <ul className={styles.container}>
         {person.starships.map((starship: string, index: number) => (
-          <li key={index}>{starship}</li>
+          <li className={styles.containerChild} key={index}>{starship}</li>
         ))}
       </ul>
       <h2>Films</h2>
-      <ul>
+      <ul className={styles.container}>
         {person.films.map((film: string, index: number) => (
-          <li key={index}>{film}</li>
+          <li className={styles.containerChild} key={index}>{film}</li>
         ))}
-      </ul>
-      <p>Gender: { person.gender}</p>
+        </ul>
+      </div>
+            <Link className={styles.linkStyle} href="/">
+        Назад на главную страницу
+      </Link>
     </>
   );
 };

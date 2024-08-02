@@ -1,4 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
+import styles from './styles.module.css'
+
 
 type Starship = {
   manufacturer: string;
@@ -17,9 +20,6 @@ type StarshipProps = {
 async function fetchStarshipsData(id: number): Promise<Starship> {
     const res = await fetch(`https://sw-api.starnavi.io/starships/`+id);
     const result = await res.json();
-//   console.log(result);
-  // console.log(id);
-    
     return{
           manufacturer: result.manufacturer || '',
           name: result.name || '',
@@ -31,19 +31,20 @@ async function fetchStarshipsData(id: number): Promise<Starship> {
 
 }
 
-
 const Starships: React.FC<StarshipProps> = async ({ params: { id } }) => {
     const starship = await fetchStarshipsData(id);
 
     return (
       <>
-        <h1>{starship.name}</h1>
-         <p>ID: {id}</p>
-        <p>Model: {starship.model}</p>
-        <p>Created: {starship.created}</p>
-        <p>Edited:{starship.edited}</p>
-        <p>Manufacturer: {starship.manufacturer}</p>
-        <p>Consumables: {starship.consumables}</p>
+        <h3>Starship name: {starship.name}</h3>
+        <p><span className={styles.spanWrap}>Model:</span> {starship.model}</p>
+        <p><span className={styles.spanWrap}>Created:</span> {starship.created}</p>
+        <p><span className={styles.spanWrap}>Edited:</span>{starship.edited}</p>
+        <p><span className={styles.spanWrap}>Manufacturer:</span> {starship.manufacturer}</p>
+        <p><span className={styles.spanWrap}>Consumables:</span> {starship.consumables}</p>
+      <Link className={styles.linkStyle} href="/">
+        Назад на главную страницу
+      </Link>
       </>
     );
 };

@@ -1,0 +1,41 @@
+.contLayout{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerManePage{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 50px;
+        justify-content: space-between;
+        align-items: center;
+        /* border: 1px black solid; */
+        padding: 12px;
+        width: 800px;
+        border-radius: 8px;
+}
+
+.item{
+    border:1px black solid;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.nameOfTitle {
+    color: black;
+}
+
+.linkStyle{
+    text-decoration: none;
+    color: brown;
+    font-size: 20px;
+}
+

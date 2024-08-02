@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from './styles.module.css'
 
 type Person = {
   id: number;
@@ -11,7 +12,6 @@ type Person = {
 async function fetchData(): Promise<Person[]> {
   const res = await fetch('https://sw-api.starnavi.io/people/');
   const result = await res.json();
-  // console.log(result); 
     return result.results.map((item: any) => ({
       id: item.id,
       name: item.name,
@@ -27,41 +27,43 @@ export default async function Home() {
   if (!Array.isArray(person) || person.length === 0) {
     return (
       <main>
-        <h1>Star Wars</h1>
         <p>Error: No people data available</p>
       </main>
     );
   }
 
   return (
+  <>
     <main>
-      <h1>Star Wars</h1>
-      {person.map((el) => (
-        <div key={el.id}>
-          <Link href={`/people/` + el.id}>{el.name}</Link>
-          <h2>Films:</h2>
-            {el.films.map((filmId:any) => (
-              <div key={filmId}>
-                <Link href={`/films/${filmId}`}>
-                  Film {filmId} 
-                </Link>
-              </div>
-            ))}
-          <h3> Starships: </h3>
-           <ul>
+      <div className={styles.container}>
+          <ul>{person.map((el) => (
+            <li className={styles.containerManePage} key={el.id}>
+              <Link className={styles.linkStyle} href={`/people/` + el.id}>{el.name}</Link>
+              <h2 className={styles.nameOfTitle}>Films:</h2>
+              <ul>
+                {el.films.map((filmId: any) => (
+                  <li className={styles.item} key={filmId}>
+                    <Link className={styles.linkStyle} href={`/films/${filmId}`}>
+                      Film {filmId}
+                    </Link>
+                  </li>))}
+              </ul>
+              <h2 className={styles.nameOfTitle}> Starships: </h2>
+              <ul>
             {el.starships.map((starshipsId:any) => (
-              <li key={starshipsId}>
-                <Link href={`/starships/${starshipsId}`}>
-                  starships {starshipsId}
+              <li className={styles.item} key={starshipsId}>
+                <Link className={styles.linkStyle} href={`/starships/${starshipsId}`}>
+                  Starship {starshipsId}
                 </Link>
               </li>
             ))}
           </ul>
-
-          <p> ____ </p>
-        </div>
+            </li>
       ))}
-    </main>
+          </ul>
+      </div>     
+    </main></>
+
   );
 }
 
